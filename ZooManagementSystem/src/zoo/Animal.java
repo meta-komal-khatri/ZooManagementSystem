@@ -1,5 +1,9 @@
 package zoo;
 
-public class Animal {
-int metghhu;
+public interface Animal {
+	public String getName();
+	public int getAge();
+	public String getSound();
+	public String getCategory();
+	public String getType();
 }
