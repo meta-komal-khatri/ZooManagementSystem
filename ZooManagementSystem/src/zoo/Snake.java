@@ -32,6 +32,7 @@ public class Snake extends Reptile {
 	public float getLength() {
 		return LengthInMeters;
 	}
+	//returns list of animal details
 	public List<String> getInfo(){
 		List<String> animalDetails=new ArrayList<String>();
 		animalDetails.add(getName());

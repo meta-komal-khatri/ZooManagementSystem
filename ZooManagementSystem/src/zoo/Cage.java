@@ -100,6 +100,13 @@ public class Cage {
 		}
 		return successOfAddingAnimal;
 	}
+	/**
+	 * it removes specific animal from zoo who is dead
+	 * @param name unique name and should be exactly the same as in the animal list
+	 * @param type type also should be exactly same as in the animal list
+	 * @param category
+	 * @return
+	 */
 	public boolean deathOfAnimal(String name,String type,String category){
 		Animal animal1=null;
 		boolean death=false;
@@ -127,31 +134,6 @@ public class Cage {
 	 */
 	public String getCageType() {
 		return cageType;
-	}
-	/**
-	 * return list of all animals in specific cage 
-	 * @return list of name of all animals
-	 */
-	public List<String> getNameOfAllAnimalsInCage() {
-		List<String> animalNameList=new ArrayList<String>();
-		for(Animal animal:animalList) {
-			animalNameList.add(animal.getName());
-		}
-		return animalNameList;
-	}
-	/**
-	 * search animal by unique animal name
-	 * @param animalName unique name of animal
-	 * @return list of animal information
-	 */
-	public List<String> findAnimals(String animalName){
-		List<String> animalDetails=new ArrayList<String>();
-		for(Animal animal:animalList) {
-			if(animal.getName().equals(animalName)) {
-				animalDetails=animal.getInfo();
-			}
-		}
-		return animalDetails;
 	}
 	/**
 	 * @return total capacity of cage
