@@ -1,5 +1,8 @@
 package zoo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Snake extends Reptile {
 	Snake(String name,int age,float weight,float length){
 		super.Name=name;
@@ -28,5 +31,16 @@ public class Snake extends Reptile {
 	}
 	public float getLength() {
 		return LengthInMeters;
+	}
+	public List<String> getInfo(){
+		List<String> animalDetails=new ArrayList<String>();
+		animalDetails.add(getName());
+		animalDetails.add(getSound());
+		animalDetails.add(getType());
+		animalDetails.add(Integer.toString(getAge()));
+		animalDetails.add(Integer.toString(numberOfLegs()));
+		animalDetails.add(Float.toString(getweight()));
+		animalDetails.add(Float.toString(getLength()));
+		return animalDetails;
 	}
 }

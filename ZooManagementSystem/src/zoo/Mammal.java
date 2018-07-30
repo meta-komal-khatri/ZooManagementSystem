@@ -8,4 +8,16 @@ public abstract class Mammal implements Animal{
 	public String getCategory() {
 		return "Mammal";
 	}
+	public String getNameOfAnimal() {
+		return Name;
+	}
+	public int getAgeOfAnimal() {
+		return Age;
+	}
+	public float getWeightOfAnimal() {
+		return weight;
+	}
+	public int getNumberOfLegs() {
+		return numberOfLegs;
+	}
 }

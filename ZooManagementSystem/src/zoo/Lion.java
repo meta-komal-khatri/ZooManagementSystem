@@ -1,5 +1,8 @@
 package zoo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Lion extends Mammal {
 
 	Lion(String name,int age,float weight){
@@ -25,5 +28,15 @@ public class Lion extends Mammal {
 	public int numberOfLegs() {
 		int numberOfLegs= 4;
 		return numberOfLegs;
+	}
+	public List<String> getInfo(){
+		List<String> animalDetails=new ArrayList<String>();
+		animalDetails.add(getName());
+		animalDetails.add(getSound());
+		animalDetails.add(getType());
+		animalDetails.add(Integer.toString(getAge()));
+		animalDetails.add(Integer.toString(numberOfLegs()));
+		animalDetails.add(Float.toString(getweight()));
+		return animalDetails;
 	}
 }
