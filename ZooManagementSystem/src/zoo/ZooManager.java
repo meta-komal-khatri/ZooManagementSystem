@@ -13,59 +13,88 @@ public class ZooManager {
 		this.capacityOfZoo=capacityOfZoo;
 		spareCapacityOfZoo=0;
 	}
-	public void addNewZone(int capacityOfZone,String typeOfZone,String ZoneName) {
+	/**
+	 * add new zone to zoo along with unique zone name,type and capacity
+	 * @param capacityOfZone
+	 * @param typeOfZone
+	 * @param ZoneName name should be unique
+	 */
+	public boolean addNewZone(int capacityOfZone,String typeOfZone,String ZoneName) {
 		if(spareCapacityOfZoo<capacityOfZoo) {
-		zoneList.add(new Zones(capacityOfZone,typeOfZone,ZoneName));
-		spareCapacityOfZoo++;
+			zoneList.add(new Zones(capacityOfZone,typeOfZone,ZoneName));
+			spareCapacityOfZoo++;
+			return true;
 		}
-	
+	return false;
 	}
+	/**
+	 * get list of all zones available in zoo
+	 * @return list of zones
+	 */
 	public List<Zones> getZoneList(){
 		return zoneList;
 	}
-	public boolean addAnimal(String name,int age,float weight,float lengthInMeters,float lengthOfFeathers,boolean canFly ,String type,String category) {
-		boolean newZone=true;
+	/**
+	 * adds animal 
+	 * @param name should be unique
+	 * @param age
+	 * @param weight
+	 * @param lengthInMeters
+	 * @param lengthOfFeathers
+	 * @param canFly
+	 * @param type
+	 * @param category
+	 * @return
+	 */
+	public boolean addAnimal(String name,int age,float weight ,String type,String category) {
 		boolean animalAdded=false;
 		for(Zones zone:zoneList) {
 			if(zone.typeOfZone.equals(category)) {
-				animalAdded=zone.addAnimalToZone(name, age, weight, lengthInMeters, lengthOfFeathers, canFly, type, category);
+				animalAdded=zone.addAnimalToZone(name, age, weight, type, category);
 				if(animalAdded) {
 					break;
 				}
 			}
 		}
-		if(!animalAdded) {
-			System.out.println("All cages are full");
-			for(Zones zone:zoneList) {
-				if(zone.capacityOfZone>0) {
-					System.out.println("There is a space in "+zone.ZoneName);
-					newZone=false;
-					System.out.println("Do you want to add cage if yes press 'y' else press 'n'");
-					char ch=sc.next().charAt(0);
-					if(ch=='y') {
-						System.out.println("Enter Cage Capacity");
-						int capacity=sc.nextInt();
-						String typeOfCage=category;
-						zone.cageList.add(new Cage(capacity,typeOfCage));
-						zone.capacityOfZone--;
-						if(category.equals("Mammal")) {
-							animalAdded=zone.cageList.get(zone.cageList.size()-1).addAnimalToCage(name, age, weight, type);
-						}
-						else if(category.equals("Reptile")) {
-							animalAdded=zone.cageList.get(zone.cageList.size()-1).addAnimalToCage(name, age, weight, lengthInMeters, type);
-						}
-						else if(category.equals("Bird")) {
-							animalAdded=zone.cageList.get(zone.cageList.size()-1).addAnimalToCage(name, age, weight, lengthOfFeathers, canFly, type);
-						}
-					}
+		return animalAdded;
+	}
+	public boolean addAnimal(String name,int age,float weight,float lengthInMeters ,String type,String category) {
+		boolean animalAdded=false;
+		for(Zones zone:zoneList) {
+			if(zone.typeOfZone.equals(category)) {
+				animalAdded=zone.addAnimalToZone(name, age, weight, lengthInMeters, type, category);
+				if(animalAdded) {
+					break;
 				}
 			}
 		}
-		if(newZone) {
-			System.out.println("there is no space in any zone add new you zone");
+		return animalAdded;
+	}
+	public boolean addAnimal(String name,int age,float weight,float lengthInMeters ,float lengthOfFeathers,boolean canFly,String type,String category) {
+		boolean animalAdded=false;
+		for(Zones zone:zoneList) {
+			if(zone.typeOfZone.equals(category)) {
+				animalAdded=zone.addAnimalToZone(name, age, weight, lengthInMeters,lengthOfFeathers,canFly, type, category);
+				if(animalAdded) {
+					break;
+				}
+			}
 		}
 		return animalAdded;
 	}
+	public boolean deathOfAnimal(String name,String type,String category){
+		boolean death=false;
+		for(Zones zone:zoneList){
+			if(zone.getTypeOfZone().equals(category)){
+				death=zone.deathOfAnimal(name,type,category);
+			}
+		}
+		return death;
+	}
+	/**
+	 * get name of all animals in zoo including cages,zones
+	 * @return
+	 */
 	public List<String> allAnimalsInZoo(){
 		List<String> animalsInZone=new ArrayList<String>();
 		for(Zones zone:zoneList) {
@@ -77,6 +106,11 @@ public class ZooManager {
 		}
 		return animalsInZone;
 	}
+	/**
+	 * search animal by their name in zoo
+	 * @param animalName
+	 * @return
+	 */
 	public List<String> findAnimalByName(String animalName){
 		List<String> animalDetails=new ArrayList<String>();
 		for(Zones zone:zoneList) {
@@ -84,9 +118,18 @@ public class ZooManager {
 		}
 		return animalDetails;
 	}
+	/**
+	 * total capacity of zoo 
+	 * @return
+	 */
 	public int totalCapacityOfZoo() {
 		return capacityOfZoo;
 	}
+	/**
+	 * 
+	 * @param zoneName
+	 * @return
+	 */
 	public int totalCapacityOfSpecificZone(String zoneName) {
 		for(Zones zone:zoneList) {
 			if(zone.ZoneName.equals(zoneName)) {
@@ -145,4 +188,5 @@ public class ZooManager {
 			}
 		}
 	}
+	
 }
