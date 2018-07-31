@@ -19,9 +19,9 @@ public class Zones {
 		this.ZoneName=ZoneName;
 	}
 	/**
-	 * 
-	 * @param capacityOfCage add a new cage to zone compatible with zone type 
-	 * @param typeOfCage 
+	 * add a new cage to zone compatible with zone type 
+	 * @param capacityOfCage number 
+	 * @param typeOfCage  should be exactly the same as in animal list
 	 * @return true if cage added successfully otherwise false
 	 */
 	public boolean addCage(int capacityOfCage,String typeOfCage) {
@@ -31,8 +31,10 @@ public class Zones {
 		System.out.println("added---------1");
 			System.out.println("added---------2");
 			if(capacityOfZone<totalCapacityOfZone ) {
+				//check type of zone
 				switch(typeOfZone){
 				case "Mammal":
+					//check type of cage
 					switch(typeOfCage){
 					case "Lion":
 						System.out.println("added---------3");
@@ -44,9 +46,8 @@ public class Zones {
 						cageList.add(new Cage(capacityOfCage,typeOfCage));
 						capacityOfZone++;
 						return true;
-						
-					}
-					break;
+				}
+				break;
 				case "Reptile":
 					switch(typeOfCage){
 					case "Snake":
@@ -60,7 +61,7 @@ public class Zones {
 						return true;
 						
 					}
-					break;
+				break;
 				case "Bird":
 					switch(typeOfCage){
 					case "Peacock":
@@ -75,14 +76,22 @@ public class Zones {
 		
 		return false;
 	}
-	
+	/**
+	 * add animal to cage which is compatible with cage type
+	 * @param name should be exactly the same as it is in animal list
+	 * @param age 
+	 * @param weight
+	 * @param type should be exactly the same as it is in animal list
+	 * @param category
+	 * @return
+	 */
 	public boolean addAnimalToZone(String name,int age,float weight,String type,String category){
 		boolean animalAdded=false;
 	
 		 outer: for(Cage cage:cageList) {
-				if(cage.cageType.equals(type)) {
+				if(cage.getCageType().equals(type)) {
 					System.out.println("added--1");
-					if(cage.capacityOfCage<cage.totalCapacityOfCage()) {
+					if(cage.occupiedCapacityOfCage()<cage.totalCapacityOfCage()) {
 						animalAdded=cage.addAnimalToCage(name, age, weight, type);
 						if(animalAdded) {
 							break outer;
@@ -92,6 +101,7 @@ public class Zones {
 		 }
 		return animalAdded;
 	}
+	//function overloading
 	public boolean addAnimalToZone(String name,int age,float weight,float lengthInMeters,String type,String category){
 		boolean animalAdded=false;
 	
@@ -107,6 +117,7 @@ public class Zones {
 		 }
 		return animalAdded;
 	}
+	//function overloading
 	public boolean addAnimalToZone(String name,int age,float weight,float lengthInMeters,float lengthOfFeathers,boolean canFly ,String type,String category){
 		boolean animalAdded=false;
 	
@@ -122,6 +133,13 @@ public class Zones {
 		 }
 		return animalAdded;
 	}
+	/**
+	 * it removes specific animal from zoo who is dead
+	 * @param name unique name and should be exactly the same as in the animal list
+	 * @param type type also should be exactly same as in the animal list
+	 * @param category
+	 * @return 
+	 */
 	public boolean deathOfAnimal(String name,String type,String category){
 		boolean death=false;
 		for(Cage cage:cageList){
@@ -152,35 +170,7 @@ public class Zones {
 	public String getTypeOfZone() {
 		return typeOfZone;
 	}
-	/**
-	 * return name of all animals in zone 
-	 * @return
-	 */
-	public List<String> getNameOfAnimalsInZone(){
-		List<String> animalsInZone=new ArrayList<String>();
-		for(Cage cage:cageList) {
-			for(Animal animal:cage.animalList) {
-				animalsInZone.add(animal.getName());
-			}
-		}
-		return animalsInZone;
-	}
-	/**
-	 * finds animal by their name
-	 * @param animalName
-	 * @return
-	 */
-	public List<String> findAnimals(String animalName){
-		List<String> animalDetails=new ArrayList<String>();
-		for(Cage cage:cageList) {
-			animalDetails=cage.findAnimals(animalName);
-		}
-		return animalDetails;
-	}
-	/**
-	 * 
-	 * @return
-	 */
+	
 	public int totalCapacityOfZone() {
 		return totalCapacityOfZone;
 	}
