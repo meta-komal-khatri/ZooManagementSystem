@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cage {
-	int totalCapacityOfCage;
-	int capacityOfCage;
-	String cageType;
+	private int totalCapacityOfCage;
+	private int capacityOfCage;
+	private String cageType;
 	List<Animal> animalList=new ArrayList<Animal>();
 	public Cage(int capacityOfCage,String cageType){
 		this.totalCapacityOfCage=capacityOfCage;
@@ -21,29 +21,18 @@ public class Cage {
 	 * @param type
 	 * @return true if animal added to cage successfully else false
 	 */
-	public boolean addAnimalToCage(String name,int age,float weight,String type) {
+	public boolean addAnimalToCage(Animal animal) {
 		boolean successOfAddingAnimal=false;
-		if(capacityOfCage<totalCapacityOfCage && cageType.equals(type)) {
-			switch(type) {
-				case "Lion":
-					animalList.add(new Lion(name,age,weight));
-					capacityOfCage++;
-					successOfAddingAnimal=true;
-					break;
-				case "BlackBear":
-					animalList.add(new BlackBear(name,age,weight));
-					capacityOfCage++;
-					successOfAddingAnimal=true;
-					break;
-				default :
-					System.out.println("No Such Animal");
-					break;
-			}
+		if(capacityOfCage<totalCapacityOfCage && cageType.equals(animal.getType())) {
+			animalList.add(animal);
+			capacityOfCage++;
+			successOfAddingAnimal=true;
 		}
 		return successOfAddingAnimal;
 			
 	}
-	//function overloading
+	
+	
 	/**
 	 * Add animal to cage compatible with type of animal 
 	 * @param name animal name should be unique
@@ -52,6 +41,7 @@ public class Cage {
 	 * @param type
 	 * @return true if animal added to cage successfully else false
 	 */
+	/*
 	public boolean addAnimalToCage(String name,int age,float weight,float lengthInMeters,String type) {
 		boolean successOfAddingAnimal=false;
 		if(capacityOfCage<totalCapacityOfCage && cageType.equals(type)) {
@@ -72,7 +62,7 @@ public class Cage {
 			}
 		}
 		return successOfAddingAnimal;
-	}
+	}*/
 	//function overloading
 	/**
 	 * Add animal to cage compatible with type of animal 
@@ -82,7 +72,7 @@ public class Cage {
 	 * @param type
 	 * @return true if animal added to cage successfully else false
 	 */
-	public boolean addAnimalToCage(String name,int age,float weight,float lengthOfFeathers,boolean canFly,String type) {
+	/*public boolean addAnimalToCage(String name,int age,float weight,float lengthOfFeathers,boolean canFly,String type) {
 		boolean successOfAddingAnimal=false;
 		if(capacityOfCage<totalCapacityOfCage && cageType.equals(type)) {
 			switch(type) {
@@ -99,7 +89,7 @@ public class Cage {
 			}
 		}
 		return successOfAddingAnimal;
-	}
+	}*/
 	public boolean deathOfAnimal(String name,String type,String category){
 		Animal animal1=null;
 		boolean death=false;
@@ -115,18 +105,6 @@ public class Cage {
 		death = true;
 		}
 		return death;
-	}
-	/**
-	 * @return current capacity of cage
-	 */
-	public int getCageCapacity() {
-		return capacityOfCage;
-	}
-	/**
-	 * @return type of cage 
-	 */
-	public String getCageType() {
-		return cageType;
 	}
 	/**
 	 * return list of all animals in specific cage 
@@ -156,17 +134,54 @@ public class Cage {
 	/**
 	 * @return total capacity of cage
 	 */
-	public int totalCapacityOfCage() {
+	/**
+	 * @return the totalCapacityOfCage
+	 */
+	public int getTotalCapacityOfCage() {
 		return totalCapacityOfCage;
 	}
 	/**
-	 * @return spare capacity of cage
+	 * @param totalCapacityOfCage the totalCapacityOfCage to set
 	 */
-	public int occupiedCapacityOfCage() {
+	public void setTotalCapacityOfCage(int totalCapacityOfCage) {
+		this.totalCapacityOfCage = totalCapacityOfCage;
+	}
+	/**
+	 * @return the capacityOfCage
+	 */
+	public int getCapacityOfCage() {
 		return capacityOfCage;
 	}
-	public int spareCapacityOfCage() {
-		return totalCapacityOfCage-capacityOfCage;
+	/**
+	 * @param capacityOfCage the capacityOfCage to set
+	 */
+	public void setCapacityOfCage(int capacityOfCage) {
+		this.capacityOfCage = capacityOfCage;
 	}
+	/**
+	 * @return the cageType
+	 */
+	public String getCageType() {
+		return cageType;
+	}
+	/**
+	 * @param cageType the cageType to set
+	 */
+	public void setCageType(String cageType) {
+		this.cageType = cageType;
+	}
+	/**
+	 * @return the animalList
+	 */
+	public List<Animal> getAnimalList() {
+		return animalList;
+	}
+	/**
+	 * @param animalList the animalList to set
+	 */
+	public void setAnimalList(List<Animal> animalList) {
+		this.animalList = animalList;
+	}
+	
 	
 }

@@ -25,7 +25,7 @@ public class ZooManager {
 			spareCapacityOfZoo++;
 			return true;
 		}
-	return false;
+		return false;
 	}
 	/**
 	 * get list of all zones available in zoo
@@ -46,12 +46,13 @@ public class ZooManager {
 	 * @param category
 	 * @return
 	 */
+
 	public boolean addAnimal(String name,int age,float weight ,String type,String category) {
 		boolean animalAdded=false;
 		for(Zones zone:zoneList) {
 			if(zone.typeOfZone.equals(category)) {
-				animalAdded=zone.addAnimalToZone(name, age, weight, type, category);
-				if(animalAdded) {
+				animalAdded=zone.addAnimalToZone(new Mammal(name, age, weight,type));
+				if(animalAdded){
 					break;
 				}
 			}
@@ -62,8 +63,8 @@ public class ZooManager {
 		boolean animalAdded=false;
 		for(Zones zone:zoneList) {
 			if(zone.typeOfZone.equals(category)) {
-				animalAdded=zone.addAnimalToZone(name, age, weight, lengthInMeters, type, category);
-				if(animalAdded) {
+				animalAdded=zone.addAnimalToZone(new Reptile(name, age, weight,lengthInMeters,type));
+				if(animalAdded){
 					break;
 				}
 			}
@@ -74,8 +75,8 @@ public class ZooManager {
 		boolean animalAdded=false;
 		for(Zones zone:zoneList) {
 			if(zone.typeOfZone.equals(category)) {
-				animalAdded=zone.addAnimalToZone(name, age, weight, lengthInMeters,lengthOfFeathers,canFly, type, category);
-				if(animalAdded) {
+				animalAdded=zone.addAnimalToZone(new Bird(name, age, weight,lengthOfFeathers,canFly,type));
+				if(animalAdded){
 					break;
 				}
 			}
@@ -114,7 +115,7 @@ public class ZooManager {
 	public List<String> findAnimalByName(String animalName){
 		List<String> animalDetails=new ArrayList<String>();
 		for(Zones zone:zoneList) {
-		animalDetails=zone.findAnimals(animalName);
+			animalDetails=zone.findAnimals(animalName);
 		}
 		return animalDetails;
 	}
@@ -130,63 +131,22 @@ public class ZooManager {
 	 * @param zoneName
 	 * @return
 	 */
-	public int totalCapacityOfSpecificZone(String zoneName) {
-		for(Zones zone:zoneList) {
-			if(zone.ZoneName.equals(zoneName)) {
-				return zone.totalCapacityOfZone();
-			}
-		}
-		return 0;
-	}
-	public int totalCapacityOfSpecificCage(String zoneName,int cageNumber) {
-		for(Zones zone:zoneList) {
-			if(zone.ZoneName.equals(zoneName)) {
-				return zone.cageList.get(cageNumber-1).totalCapacityOfCage();
-			}
-		}
-		return 0;
-	}
-	public int spareCapacityOfZoo() {
-		int sum=0;
-		for(Zones zone:zoneList) {
-			sum+=spareCapacityOfSpecificZone(zone.ZoneName);
-		}
-		return sum;
-	}
-	public int spareCapacityOfSpecificZone(String ZoneName) {
-		int sum=0;
-		for(Zones zone:zoneList) {
-			if(zone.ZoneName.equals(ZoneName)) {
-				for(int i=0;i<zone.cageList.size();i++) {
-					sum+=zone.cageList.get(i).spareCapacityOfCage();
-				}
-				return sum;
-			}
-		}
-		return 0;
-	}
-	public int spareCapacityOfSpecificCage(String ZoneName,int cageNumber) {
-		for(Zones zone:zoneList) {
-			if(zone.ZoneName.equals(ZoneName)) {
-				return zone.cageList.get(cageNumber-1).spareCapacityOfCage();
-				
-			}
-		}
-		return 0;
-	}
+
+
+
 	public void move(String ZoneName,int fromCageNumber,int toCageNumber,String animalName) {
 		for(Zones zone:zoneList) {
 			if(zone.ZoneName.equals(ZoneName)) {
-				if(zone.cageList.get(toCageNumber-1).cageType.equals(zone.cageList.get(fromCageNumber-1).cageType)) {
-				for(Animal animal:zone.cageList.get(fromCageNumber-1).animalList) {
-					if(animal.getName().equals(animalName)) {
-						zone.cageList.get(toCageNumber-1).animalList.add(animal);
-						zone.cageList.get(fromCageNumber-1).animalList.remove(animal);
+				if(zone.cageList.get(toCageNumber-1).getCageType().equals(zone.cageList.get(fromCageNumber-1).getCageType())) {
+					for(Animal animal:zone.cageList.get(fromCageNumber-1).animalList) {
+						if(animal.getName().equals(animalName)) {
+							zone.cageList.get(toCageNumber-1).animalList.add(animal);
+							zone.cageList.get(fromCageNumber-1).animalList.remove(animal);
+						}
 					}
-				}
 				}
 			}
 		}
 	}
-	
+
 }
