@@ -50,7 +50,7 @@ public class ZooManager {
 	public boolean addAnimal(String name,int age,float weight ,String type,String category) {
 		boolean animalAdded=false;
 		for(Zones zone:zoneList) {
-			if(zone.typeOfZone.equals(category)) {
+			if(zone.getTypeOfZone().equals(category)) {
 				animalAdded=zone.addAnimalToZone(new Mammal(name, age, weight,type));
 				if(animalAdded){
 					break;
@@ -62,7 +62,7 @@ public class ZooManager {
 	public boolean addAnimal(String name,int age,float weight,float lengthInMeters ,String type,String category) {
 		boolean animalAdded=false;
 		for(Zones zone:zoneList) {
-			if(zone.typeOfZone.equals(category)) {
+			if(zone.getTypeOfZone().equals(category)) {
 				animalAdded=zone.addAnimalToZone(new Reptile(name, age, weight,lengthInMeters,type));
 				if(animalAdded){
 					break;
@@ -74,7 +74,7 @@ public class ZooManager {
 	public boolean addAnimal(String name,int age,float weight,float lengthInMeters ,float lengthOfFeathers,boolean canFly,String type,String category) {
 		boolean animalAdded=false;
 		for(Zones zone:zoneList) {
-			if(zone.typeOfZone.equals(category)) {
+			if(zone.getTypeOfZone().equals(category)) {
 				animalAdded=zone.addAnimalToZone(new Bird(name, age, weight,lengthOfFeathers,canFly,type));
 				if(animalAdded){
 					break;
@@ -99,7 +99,7 @@ public class ZooManager {
 	public List<String> allAnimalsInZoo(){
 		List<String> animalsInZone=new ArrayList<String>();
 		for(Zones zone:zoneList) {
-			for(Cage cage:zone.cageList) {
+			for(Cage cage:zone.getCageList()) {
 				for(Animal animal:cage.animalList) {
 					animalsInZone.add(animal.getName());
 				}
@@ -136,12 +136,12 @@ public class ZooManager {
 
 	public void move(String ZoneName,int fromCageNumber,int toCageNumber,String animalName) {
 		for(Zones zone:zoneList) {
-			if(zone.ZoneName.equals(ZoneName)) {
-				if(zone.cageList.get(toCageNumber-1).getCageType().equals(zone.cageList.get(fromCageNumber-1).getCageType())) {
-					for(Animal animal:zone.cageList.get(fromCageNumber-1).animalList) {
+			if(zone.getZoneName().equals(ZoneName)) {
+				if(zone.getCageList().get(toCageNumber-1).getCageType().equals(zone.getCageList().get(fromCageNumber-1).getCageType())) {
+					for(Animal animal:zone.getCageList().get(fromCageNumber-1).animalList) {
 						if(animal.getName().equals(animalName)) {
-							zone.cageList.get(toCageNumber-1).animalList.add(animal);
-							zone.cageList.get(fromCageNumber-1).animalList.remove(animal);
+							zone.getCageList().get(toCageNumber-1).animalList.add(animal);
+							zone.getCageList().get(fromCageNumber-1).animalList.remove(animal);
 						}
 					}
 				}

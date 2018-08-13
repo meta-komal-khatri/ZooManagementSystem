@@ -4,19 +4,71 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 public class Zones {
-	ZooManager zoomanager=new ZooManager(13);
-	public int totalCapacityOfZone;
-	public int capacityOfZone;
-	public String ZoneName;
-	public List<Cage> cageList=new ArrayList<Cage>();
-	public final String typeOfZone;
-	Scanner sc=new Scanner(System.in);
+	private int totalCapacityOfZone;
+	private int currentcapacityOfZone;
+	private String ZoneName;
+	private List<Cage> cageList=new ArrayList<Cage>();
+	private final String typeOfZone;
 
 	public Zones(int capacityOfZone,String typeOfZone,String ZoneName){
 		totalCapacityOfZone=capacityOfZone;
-		this.capacityOfZone=0;
+		this.currentcapacityOfZone=0;
 		this.typeOfZone=typeOfZone;
 		this.ZoneName=ZoneName;
+	}
+	/**
+	 * @return the totalCapacityOfZone
+	 */
+	public int getTotalCapacityOfZone() {
+		return totalCapacityOfZone;
+	}
+	/**
+	 * @param totalCapacityOfZone the totalCapacityOfZone to set
+	 */
+	public void setTotalCapacityOfZone(int totalCapacityOfZone) {
+		this.totalCapacityOfZone = totalCapacityOfZone;
+	}
+	/**
+	 * @return the currentcapacityOfZone
+	 */
+	public int getCurrentcapacityOfZone() {
+		return currentcapacityOfZone;
+	}
+	/**
+	 * @param currentcapacityOfZone the currentcapacityOfZone to set
+	 */
+	public void setCurrentcapacityOfZone(int currentcapacityOfZone) {
+		this.currentcapacityOfZone = currentcapacityOfZone;
+	}
+	/**
+	 * @return the zoneName
+	 */
+	public String getZoneName() {
+		return ZoneName;
+	}
+	/**
+	 * @param zoneName the zoneName to set
+	 */
+	public void setZoneName(String zoneName) {
+		ZoneName = zoneName;
+	}
+	/**
+	 * @return the cageList
+	 */
+	public List<Cage> getCageList() {
+		return cageList;
+	}
+	/**
+	 * @param cageList the cageList to set
+	 */
+	public void setCageList(List<Cage> cageList) {
+		this.cageList = cageList;
+	}
+	/**
+	 * @return the typeOfZone
+	 */
+	public String getTypeOfZone() {
+		return typeOfZone;
 	}
 	/**
 	 * 
@@ -28,18 +80,18 @@ public class Zones {
 		if(totalCapacityOfZone==0){
 			throw new AssertionError("Null zone can not add new cage");
 		}
-		if(capacityOfZone<totalCapacityOfZone ) {
+		if(currentcapacityOfZone<totalCapacityOfZone ) {
 			switch(typeOfZone){
 			case "Mammal":
 				switch(typeOfCage){
 				case "Lion":
 					cageList.add(new Cage(capacityOfCage,typeOfCage));
-					capacityOfZone++;
+					currentcapacityOfZone++;
 					return true;		
 
 				case "BlackBear":
 					cageList.add(new Cage(capacityOfCage,typeOfCage));
-					capacityOfZone++;
+					currentcapacityOfZone++;
 					return true;
 				}
 				break;
@@ -47,12 +99,12 @@ public class Zones {
 				switch(typeOfCage){
 				case "Snake":
 					cageList.add(new Cage(capacityOfCage,typeOfCage));
-					capacityOfZone++;
+					currentcapacityOfZone++;
 					return true;		
 
 				case "Crocodile":
 					cageList.add(new Cage(capacityOfCage,typeOfCage));
-					capacityOfZone++;
+					currentcapacityOfZone++;
 					return true;
 				}
 				break;
@@ -60,7 +112,7 @@ public class Zones {
 					switch(typeOfCage){
 					case "Peacock":
 						cageList.add(new Cage(capacityOfCage,typeOfCage));
-						capacityOfZone++;
+						currentcapacityOfZone++;
 						return true;
 					}
 					break;
@@ -99,23 +151,6 @@ public class Zones {
 			return death;
 		}
 		/**
-		 * information of all cages 
-		 * @return list of cages
-		 */
-		public List<Cage> getInfoOfCages(){
-			return cageList;
-		}
-		/**
-		 * spare capacity of zone
-		 * @return number
-		 */
-		public int sparecapacityOfZone() {
-			return capacityOfZone;
-		}
-		public String getTypeOfZone() {
-			return typeOfZone;
-		}
-		/**
 		 * return name of all animals in zone 
 		 * @return
 		 */
@@ -140,14 +175,5 @@ public class Zones {
 			}
 			return animalDetails;
 		}
-		/**
-		 * 
-		 * @return
-		 */
-		public int totalCapacityOfZone() {
-			return totalCapacityOfZone;
-		}
-		public int spareCapacityOfZone() {
-			return capacityOfZone;
-		}
+	
 	}

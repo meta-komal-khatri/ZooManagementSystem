@@ -61,7 +61,7 @@ public class ZooManagementTest {
 		//assertEquals(1,zoomanager.zoneList.get(0).cageList.get(0).occupiedCapacityOfCage());
 		
 		//death of animal 
-		assertEquals(true,zoomanager.zoneList.get(0).cageList.get(0).deathOfAnimal("Sher","Lion","Mammal"));
+		assertEquals(true,zoomanager.zoneList.get(0).getCageList().get(0).deathOfAnimal("Sher","Lion","Mammal"));
 		
 		//occupied capacity of first cage of lion type in mammal zone after death of animal
 		//assertEquals(0,zoomanager.zoneList.get(0).cageList.get(0).occupiedCapacityOfCage());
